@@ -35,7 +35,7 @@ workspace "ZEngine"
 		{
 			"%{prj.name}/src/**.hpp",
 			"%{prj.name}/src/**.hpp",
-			"%{prj.name}/src/**.cpp",
+			"%{prj.name}/src/**.cpp"
 		}
 
 		includedirs
