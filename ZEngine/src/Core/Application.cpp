@@ -15,8 +15,11 @@ namespace ZEngine {
 
 	void Application::run()
 	{
-		std::cout << "Hello\n";
-		system("pause");
+		while (m_bRunning)
+		{
+			Sleep(1000);
+			m_bRunning = false;
+		}
 	}
 
 }

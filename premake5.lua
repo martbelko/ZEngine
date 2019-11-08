@@ -8,7 +8,7 @@ workspace "ZEngine"
 		"Dist"
 	}
 
-	startproject "ZEngine"
+	startproject "Sandbox"
 
 	flags
 	{
