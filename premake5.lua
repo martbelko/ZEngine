@@ -16,7 +16,7 @@ workspace "ZEngine"
 	}
 
 	outputdir = "%{cfg.buildcfg} - %{cfg.platform}"
-
+	
 	project "ZEngine"
 		kind "StaticLib"
 		language "C++"
