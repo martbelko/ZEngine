@@ -18,7 +18,7 @@ namespace ZEngine {
 		while (m_bRunning)
 		{
 			Sleep(1000);
-			m_bRunning = false;
+			//m_bRunning = false;
 		}
 	}
 

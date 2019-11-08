@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/Core.hpp"
+#include "ZEngine/Core/Core.hpp"
 
 namespace ZEngine {
 

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Core/Core.hpp"
-#include "Core/Application.hpp"
+#include "ZEngine/Core/Core.hpp"
+#include "ZEngine/Core/Application.hpp"
 
 // --- Entry Point ---
-#include "Core/EntryPoint.hpp"
+#include "ZEngine/Core/EntryPoint.hpp"

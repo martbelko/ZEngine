@@ -16,6 +16,11 @@ workspace "ZEngine"
 	}
 
 	outputdir = "%{cfg.buildcfg} - %{cfg.platform}"
+
+	IncludeDir = {}
+	IncludeDir["GLFW"] = "ZEngine/vendor/GLFW/include"
+
+	include "ZEngine/vendor/GLFW"
 	
 	project "ZEngine"
 		kind "StaticLib"
@@ -23,7 +28,6 @@ workspace "ZEngine"
 		location "ZEngine"
 		cppdialect "C++17"
 		staticruntime "on"
-		systemversion "latest"
 
 		targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 		objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -41,6 +45,13 @@ workspace "ZEngine"
 		includedirs
 		{
 			"%{prj.name}/src",
+			"%{IncludeDir.GLFW}"
+		}
+
+		links
+		{
+			"GLFW",
+			"opengl32.lib"
 		}
 
 		filter "configurations:Debug"
@@ -59,6 +70,10 @@ workspace "ZEngine"
 			defines "ZE_DIST"
 			runtime "Release"
 			optimize "Speed"
+		
+		filter "system:windows"
+			defines "ZE_WIN"
+			systemversion "latest"
 
 		filter "platforms:*32"
 			defines "ZE_32"
