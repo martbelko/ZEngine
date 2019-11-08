@@ -44,24 +44,24 @@ workspace "ZEngine"
 		}
 
 		filter "configurations:Debug"
-			defines "Z_DEBUG"
+			defines "ZE_DEBUG"
 			runtime "Debug"
 			symbols "on"
 			optimize "off"
 
 		filter "configurations:Release"
-			defines "Z_RELEASE"
+			defines "ZE_RELEASE"
 			runtime "Release"
 			optimize "on"
 			symbols "off"
 
 		filter "configurations:Dist"
-			defines "Z_DIST"
+			defines "ZE_DIST"
 			runtime "Release"
 			optimize "Speed"
 
 		filter "platforms:*32"
-			defines "Z_32"
+			defines "ZE_32"
 
 		filter "platforms:*64"
-			defines "Z_64"
+			defines "ZE_64"

@@ -1,9 +1,12 @@
 #include "zpch.hpp"
-#include <iostream>
+
+#include "Core/Core.hpp"
 
 int main()
 {
-	std::cout << "Hello, world\n";
+	Log::Init();
+	Log::GetCoreLogger()->info("ZEngine logger initialized");
+	Log::GetClientLogger()->info("Client logger initialized");
 	system("pause");
 	return 0;
 }
