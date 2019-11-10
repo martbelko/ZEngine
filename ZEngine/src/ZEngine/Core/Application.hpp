@@ -9,6 +9,8 @@
 #include "ZEngine/Events/Event.hpp"
 #include "ZEngine/Events/ApplicationEvent.hpp"
 
+#include "ZEngine/Renderer/Shader.hpp"
+
 namespace ZEngine {
 
 	class Application
@@ -35,6 +37,9 @@ namespace ZEngine {
 		bool m_bRunning = true;
 		LayerStack m_LayerStack;
 		ImGuiLayer* m_pImGuiLayer;
+
+		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+		std::unique_ptr<Shader> m_Shader;
 	private:
 		static Application* s_pInstance;
 	};

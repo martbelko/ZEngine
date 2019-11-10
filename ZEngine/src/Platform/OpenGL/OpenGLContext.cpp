@@ -13,6 +13,11 @@ namespace ZEngine {
 		glfwMakeContextCurrent(window);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		ZE_CORE_ASSERT(status, "Glad failed to initialize!");
+
+		ZE_CORE_INFO("OpenGL Info:");
+		ZE_CORE_INFO("	Renderer: %", glGetString(GL_RENDERER));
+		ZE_CORE_INFO("	Vendor: %", glGetString(GL_VENDOR));
+		ZE_CORE_INFO("	Version: %", glGetString(GL_VERSION));
 	}
 
 	void OpenGLContext::swapBuffers()
