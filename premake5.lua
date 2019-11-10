@@ -19,8 +19,13 @@ workspace "ZEngine"
 
 	IncludeDir = {}
 	IncludeDir["GLFW"] = "ZEngine/vendor/GLFW/include"
+	IncludeDir["Glad"] = "ZEngine/vendor/Glad/include"
+	IncludeDir["ImGui"] = "ZEngine/vendor/ImGui"
+	IncludeDir["glm"] = "ZEngine/vendor/glm"
 
 	include "ZEngine/vendor/GLFW"
+	include "ZEngine/vendor/Glad"
+	include "ZEngine/vendor/ImGui"
 	
 	project "ZEngine"
 		kind "StaticLib"
@@ -28,6 +33,7 @@ workspace "ZEngine"
 		location "ZEngine"
 		cppdialect "C++17"
 		staticruntime "on"
+		systemversion "latest"
 
 		targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 		objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -45,13 +51,18 @@ workspace "ZEngine"
 		includedirs
 		{
 			"%{prj.name}/src",
-			"%{IncludeDir.GLFW}"
+			"%{IncludeDir.GLFW}",
+			"%{IncludeDir.Glad}",
+			"%{IncludeDir.ImGui}",
+			"%{IncludeDir.glm}"
 		}
 
 		links
 		{
+			"opengl32.lib",
 			"GLFW",
-			"opengl32.lib"
+			"Glad",
+			"ImGui"
 		}
 
 		filter "configurations:Debug"
@@ -70,10 +81,14 @@ workspace "ZEngine"
 			defines "ZE_DIST"
 			runtime "Release"
 			optimize "Speed"
-		
+
 		filter "system:windows"
-			defines "ZE_WIN"
-			systemversion "latest"
+			defines
+			{
+				"ZE_PLATFORM_WINDOWS",
+				"_CRT_SECURE_NO_WARNINGS",
+				"GLFW_INCLUDE_NONE"
+			}
 
 		filter "platforms:*32"
 			defines "ZE_32"
@@ -102,6 +117,7 @@ workspace "ZEngine"
 		{
 			"ZEngine/src",
 			"Sandbox/src",
+			"%{IncludeDir.glm}"
 		}
 
 		links
@@ -110,6 +126,11 @@ workspace "ZEngine"
 		}
 
 		filter "system:windows"
+			defines
+			{
+				"ZE_PLATFORM_WINDOWS"
+			}
+
 			systemversion "latest"
 		
 		filter "configurations:Debug"

@@ -1,5 +1,9 @@
 #pragma once
 
+#ifndef ZE_PLATFORM_WINDOWS
+#error Windows only support at the moment
+#endif
+
 #ifdef ZE_DEBUG
 	#define ZE_ENABLE_ENGINE_ASSERTS
 #endif
@@ -15,3 +19,5 @@
 #else
 	#define ZE_ASSERT(x, ...)
 #endif
+
+#define BIT(x) (1 << x)

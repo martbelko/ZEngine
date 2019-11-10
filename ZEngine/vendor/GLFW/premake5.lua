@@ -28,26 +28,16 @@ project "GLFW"
 		"src/osmesa_context.c"
 	}
 
-	defines
-	{
-		"_GLFW_WIN32",
-		"_CRT_SECURE_NO_WARNINGS"
-	}
-
 	systemversion "latest"
 	staticruntime "on"
 
-	filter "configurations:Debug"
-		runtime "Debug"
-		optimize "off"
-		symbols "on"
+	filter "system:windows"
+		defines
+		{
+			"_GLFW_WIN32",
+			"_CRT_SECURE_NO_WARNINGS",
+		}
 
-	filter "configurations:Release"
-		runtime "Release"
-		optimize "on"
-		symbols "off"
-
-	filter "configurations:Dist"
-		runtime "Release"
-		optimize "speed"
-		symbols "off"
+	runtime "Release"
+	optimize "speed"
+	symbols "off"

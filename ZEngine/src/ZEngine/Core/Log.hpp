@@ -21,12 +21,46 @@ namespace ZEngine {
 		Logger() = default;
 
 		Logger(const std::string& name);
+		
+		template<typename T>
+		void trace(const T& value)
+		{
+			changeOutputColor(Colors::GREEN);
+			printLoggerName();
+			print(value);
+		}
 
-		void trace(const char* format);
-		void info(const char* format);
-		void warn(const char* format);
-		void error(const char* format);
-		void fatal(const char* format);
+		template<typename T>
+		void info(const T& value)
+		{
+			changeOutputColor(Colors::CYAN);
+			printLoggerName();
+			print(value);
+		}
+
+		template<typename T>
+		void warn(const T& value)
+		{
+			changeOutputColor(Colors::WHITE);
+			printLoggerName();
+			print(value);
+		}
+
+		template<typename T>
+		void error(const T& value)
+		{
+			changeOutputColor(Colors::YELLOW);
+			printLoggerName();
+			print(value);
+		}
+
+		template<typename T>
+		void fatal(const T& value)
+		{
+			changeOutputColor(Colors::RED);
+			printLoggerName();
+			print(value);
+		}
 
 		template<typename T, typename... Targs>
 		void trace(const char* format, T value, Targs... Fargs)
@@ -68,7 +102,11 @@ namespace ZEngine {
 			print(format, value, Fargs...);
 		}
 	private:
-		void print(const char* format);
+		template<typename T>
+		void print(const T& value)
+		{
+			std::cout << value << '\n';
+		}
 
 		template<typename T, typename... Targs>
 		void print(const char* format, T value, Targs... Fargs)
