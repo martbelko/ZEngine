@@ -47,6 +47,8 @@ namespace ZEngine {
 
 	void OpenGLVertexArray::AddVertexBuffer(std::shared_ptr<VertexBuffer>& vertexBuffer)
 	{
+		ZE_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer Layout was not set!");
+
 		glBindVertexArray(m_RendererID);
 
 		unsigned int index = 0;

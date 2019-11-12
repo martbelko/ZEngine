@@ -12,8 +12,11 @@
 #include "ZEngine/Renderer/Buffer.hpp"
 #include "ZEngine/Renderer/VertexArray.hpp"
 #include "ZEngine/Renderer/Shader.hpp"
+#include "ZEngine/Renderer/Camera.hpp"
 
 namespace ZEngine {
+
+	#define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
 
 	class Application
 	{
@@ -39,11 +42,6 @@ namespace ZEngine {
 		bool m_bRunning = true;
 		LayerStack m_LayerStack;
 		ImGuiLayer* m_pImGuiLayer;
-
-		std::shared_ptr<VertexArray> m_VertexArray;
-		std::shared_ptr<VertexArray> m_SquareVA;
-		std::shared_ptr<Shader> m_Shader;
-		std::shared_ptr<Shader> m_SquareShader;
 	private:
 		static Application* s_pInstance;
 	};

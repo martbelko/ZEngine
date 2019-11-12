@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <glm/glm.hpp>
 
 namespace ZEngine {
 
@@ -12,6 +13,8 @@ namespace ZEngine {
 
 		void Bind() const;
 		void Unbind() const;
+
+		void UploadUniformMat4(const std::string& uniformName, const glm::mat4& matrix);
 	private:
 		unsigned int m_RendererID;
 	};
