@@ -20,7 +20,7 @@ namespace ZEngine {
 		ZE_CORE_INFO("	Version: %", glGetString(GL_VERSION));
 	}
 
-	void OpenGLContext::swapBuffers()
+	void OpenGLContext::SwapBuffers()
 	{
 		glfwSwapBuffers(m_hWindowHandle);
 	}

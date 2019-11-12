@@ -10,13 +10,13 @@ namespace ZEngine {
 		ImGuiLayer();
 		virtual ~ImGuiLayer() override;
 
-		virtual void onAttach() override;
-		virtual void onDetach() override;
+		virtual void OnAttach() override;
+		virtual void OnDetach() override;
 
-		virtual void onImGuiRender() override;
+		virtual void OnImGuiRender() override;
 
-		void begin();
-		void end();
+		void Begin();
+		void End();
 	};
 
 }

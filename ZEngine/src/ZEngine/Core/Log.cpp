@@ -12,12 +12,12 @@ namespace ZEngine {
 		hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
 	}
 
-	void Logger::printLoggerName()
+	void Logger::PrintLoggerName()
 	{
 		std::cout << '[' << m_strName << "] : ";
 	}
 
-	void Logger::changeOutputColor(Colors color)
+	void Logger::ChangeOutputColor(Colors color)
 	{
 		// TODO: Sort by RGB
 		switch (color)
@@ -44,7 +44,7 @@ namespace ZEngine {
 			SetConsoleTextAttribute(hStdout, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
 			break;
 		default:
-			print("% logger error: Unknown color\n");
+			Print("% logger error: Unknown color\n");
 			break;
 		}
 	}

@@ -12,7 +12,7 @@ class Sandbox : public ZEngine::Application
 public:
 	Sandbox()
 	{
-		ZEngine::Application::get().pushLayer(new ExampleLayer());
+		ZEngine::Application::Get().PushLayer(new ExampleLayer());
 	}
 
 	virtual ~Sandbox() override

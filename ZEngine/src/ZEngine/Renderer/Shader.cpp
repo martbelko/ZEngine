@@ -124,12 +124,12 @@ namespace ZEngine {
 		glDeleteProgram(m_RendererID);
 	}
 
-	void Shader::bind() const
+	void Shader::Bind() const
 	{
 		glUseProgram(m_RendererID);
 	}
 
-	void Shader::unbind() const
+	void Shader::Unbind() const
 	{
 		glUseProgram(0);
 	}

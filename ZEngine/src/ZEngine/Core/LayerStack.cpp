@@ -7,38 +7,38 @@ namespace ZEngine {
 	{
 		for (Layer* layer : m_Layers)
 		{
-			layer->onDetach();
+			layer->OnDetach();
 			delete layer;
 		}
 	}
 
-	void LayerStack::pushLayer(Layer* layer)
+	void LayerStack::PushLayer(Layer* layer)
 	{
 		m_Layers.emplace(m_Layers.begin() + m_uiInsertionIndex++, layer);
 	}
 
-	void LayerStack::popLayer(Layer* layer)
+	void LayerStack::PopLayer(Layer* layer)
 	{
 		auto it = std::find(m_Layers.begin(), m_Layers.begin() + m_uiInsertionIndex, layer);
 		if (it != m_Layers.begin() + m_uiInsertionIndex)
 		{
-			layer->onDetach();
+			layer->OnDetach();
 			m_Layers.erase(it);
 			--m_uiInsertionIndex;
 		}
 	}
 
-	void LayerStack::pushOverlay(Layer* layer)
+	void LayerStack::PushOverlay(Layer* layer)
 	{
 		m_Layers.emplace_back(layer);
 	}
 
-	void LayerStack::popOverlay(Layer* layer)
+	void LayerStack::PopOverlay(Layer* layer)
 	{
 		auto it = std::find(m_Layers.begin() + m_uiInsertionIndex, m_Layers.end(), layer);
 		if (it != m_Layers.end())
 		{
-			layer->onDetach();
+			layer->OnDetach();
 			m_Layers.erase(it);
 		}
 	}

@@ -125,38 +125,38 @@ namespace ZEngine {
 		glfwTerminate();
 	}
 
-	void WindowsWindow::onUpdate()
+	void WindowsWindow::OnUpdate()
 	{
 		glfwPollEvents();
-		m_pContext->swapBuffers();
+		m_pContext->SwapBuffers();
 	}
 
-	void WindowsWindow::setEventCallback(const EventCallbackFn& callback)
+	void WindowsWindow::SetEventCallback(const EventCallbackFn& callback)
 	{
 		m_WindowData.m_Callback = callback;
 	}
 
-	unsigned int WindowsWindow::getWidth() const
+	unsigned int WindowsWindow::GetWidth() const
 	{
 		return m_WindowData.m_uiWidth;
 	}
 
-	unsigned int WindowsWindow::getHeight() const
+	unsigned int WindowsWindow::GetHeight() const
 	{
 		return m_WindowData.m_uiHeight;
 	}
 
-	void* WindowsWindow::getNativeWindow() const
+	void* WindowsWindow::GetNativeWindow() const
 	{
 		return m_pNativeWindow;
 	}
 
-	bool WindowsWindow::isVSync() const
+	bool WindowsWindow::IsVSync() const
 	{
 		return m_WindowData.m_bVSync;
 	}
 
-	void WindowsWindow::setVSync(bool enabled)
+	void WindowsWindow::SetVSync(bool enabled)
 	{
 		if (enabled)
 			glfwSwapInterval(1);
@@ -166,7 +166,7 @@ namespace ZEngine {
 		m_WindowData.m_bVSync = enabled;
 	}
 
-	Window* Window::create(unsigned int width, unsigned height, const std::string& title)
+	Window* Window::Create(unsigned int width, unsigned height, const std::string& title)
 	{
 		return new WindowsWindow(width, height, title);
 	}

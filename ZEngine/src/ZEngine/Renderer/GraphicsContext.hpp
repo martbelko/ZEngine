@@ -8,7 +8,7 @@ namespace ZEngine {
 	{
 	public:
 		GraphicsContext() = default;
-		virtual void swapBuffers() = 0;
+		virtual void SwapBuffers() = 0;
 	};
 
 }

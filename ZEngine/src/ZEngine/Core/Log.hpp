@@ -23,93 +23,93 @@ namespace ZEngine {
 		Logger(const std::string& name);
 		
 		template<typename T>
-		void trace(const T& value)
+		void Trace(const T& value)
 		{
-			changeOutputColor(Colors::GREEN);
-			printLoggerName();
-			print(value);
+			ChangeOutputColor(Colors::GREEN);
+			PrintLoggerName();
+			Print(value);
 		}
 
 		template<typename T>
-		void info(const T& value)
+		void Info(const T& value)
 		{
-			changeOutputColor(Colors::CYAN);
-			printLoggerName();
-			print(value);
+			ChangeOutputColor(Colors::CYAN);
+			PrintLoggerName();
+			Print(value);
 		}
 
 		template<typename T>
-		void warn(const T& value)
+		void Warn(const T& value)
 		{
-			changeOutputColor(Colors::WHITE);
-			printLoggerName();
-			print(value);
+			ChangeOutputColor(Colors::WHITE);
+			PrintLoggerName();
+			Print(value);
 		}
 
 		template<typename T>
-		void error(const T& value)
+		void Error(const T& value)
 		{
-			changeOutputColor(Colors::YELLOW);
-			printLoggerName();
-			print(value);
+			ChangeOutputColor(Colors::YELLOW);
+			PrintLoggerName();
+			Print(value);
 		}
 
 		template<typename T>
-		void fatal(const T& value)
+		void Fatal(const T& value)
 		{
-			changeOutputColor(Colors::RED);
-			printLoggerName();
-			print(value);
+			ChangeOutputColor(Colors::RED);
+			PrintLoggerName();
+			Print(value);
 		}
 
 		template<typename T, typename... Targs>
-		void trace(const char* format, T value, Targs... Fargs)
+		void Trace(const char* format, T value, Targs... Fargs)
 		{
-			changeOutputColor(Colors::GREEN);
-			printLoggerName();
-			print(format, value, Fargs...);
+			ChangeOutputColor(Colors::GREEN);
+			PrintLoggerName();
+			Print(format, value, Fargs...);
 		}
 
 		template<typename T, typename... Targs>
-		void info(const char* format, T value, Targs... Fargs)
+		void Info(const char* format, T value, Targs... Fargs)
 		{
-			changeOutputColor(Colors::CYAN);
-			printLoggerName();
-			print(format, value, Fargs...);
+			ChangeOutputColor(Colors::CYAN);
+			PrintLoggerName();
+			Print(format, value, Fargs...);
 		}
 
 		template<typename T, typename... Targs>
-		void warn(const char* format, T value, Targs... Fargs)
+		void Warn(const char* format, T value, Targs... Fargs)
 		{
-			changeOutputColor(Colors::WHITE);
-			printLoggerName();
-			print(format, value, Fargs...);
+			ChangeOutputColor(Colors::WHITE);
+			PrintLoggerName();
+			Print(format, value, Fargs...);
 		}
 
 		template<typename T, typename... Targs>
-		void error(const char* format, T value, Targs... Fargs)
+		void Error(const char* format, T value, Targs... Fargs)
 		{
-			changeOutputColor(Colors::YELLOW);
-			printLoggerName();
-			print(format, value, Fargs...);
+			ChangeOutputColor(Colors::YELLOW);
+			PrintLoggerName();
+			Print(format, value, Fargs...);
 		}
 
 		template<typename T, typename... Targs>
-		void fatal(const char* format, T value, Targs... Fargs)
+		void Fatal(const char* format, T value, Targs... Fargs)
 		{
-			changeOutputColor(Colors::RED);
-			printLoggerName();
-			print(format, value, Fargs...);
+			ChangeOutputColor(Colors::RED);
+			PrintLoggerName();
+			Print(format, value, Fargs...);
 		}
 	private:
 		template<typename T>
-		void print(const T& value)
+		void Print(const T& value)
 		{
 			std::cout << value << '\n';
 		}
 
 		template<typename T, typename... Targs>
-		void print(const char* format, T value, Targs... Fargs)
+		void Print(const char* format, T value, Targs... Fargs)
 		{
 			for (; *format != 0; ++format)
 			{
@@ -120,7 +120,7 @@ namespace ZEngine {
 				else if (*format == '%')
 				{
 					std::cout << value;
-					print(format + 1, Fargs...);
+					Print(format + 1, Fargs...);
 					return;
 				}
 				std::cout << *format;
@@ -128,9 +128,9 @@ namespace ZEngine {
 			std::cout << '\n';
 		}
 
-		void printLoggerName();
+		void PrintLoggerName();
 
-		void changeOutputColor(Logger::Colors color);
+		void ChangeOutputColor(Logger::Colors color);
 	private:
 		std::string m_strName;
 		HANDLE hStdout;
@@ -155,15 +155,15 @@ namespace ZEngine {
 }
 
 // Core log macros
-#define ZE_CORE_TRACE(...)    Log::GetCoreLogger()->trace(__VA_ARGS__)
-#define ZE_CORE_INFO(...)     Log::GetCoreLogger()->info(__VA_ARGS__)
-#define ZE_CORE_WARN(...)     Log::GetCoreLogger()->warn(__VA_ARGS__)
-#define ZE_CORE_ERROR(...)    Log::GetCoreLogger()->error(__VA_ARGS__)
-#define ZE_CORE_FATAL(...)    Log::GetCoreLogger()->fatal(__VA_ARGS__)
+#define ZE_CORE_TRACE(...)    Log::GetCoreLogger()->Trace(__VA_ARGS__)
+#define ZE_CORE_INFO(...)     Log::GetCoreLogger()->Info(__VA_ARGS__)
+#define ZE_CORE_WARN(...)     Log::GetCoreLogger()->Warn(__VA_ARGS__)
+#define ZE_CORE_ERROR(...)    Log::GetCoreLogger()->Error(__VA_ARGS__)
+#define ZE_CORE_FATAL(...)    Log::GetCoreLogger()->Fatal(__VA_ARGS__)
 
 // Client log macros
-#define ZE_TRACE(...)         Log::GetClientLogger()->trace(__VA_ARGS__)
-#define ZE_INFO(...)          Log::GetClientLogger()->info(__VA_ARGS__)
-#define ZE_WARN(...)          Log::GetClientLogger()->warn(__VA_ARGS__)
-#define ZE_ERROR(...)         Log::GetClientLogger()->error(__VA_ARGS__)
-#define ZE_FATAL(...)         Log::GetClientLogger()->fatal(__VA_ARGS__)
+#define ZE_TRACE(...)         Log::GetClientLogger()->Trace(__VA_ARGS__)
+#define ZE_INFO(...)          Log::GetClientLogger()->Info(__VA_ARGS__)
+#define ZE_WARN(...)          Log::GetClientLogger()->Warn(__VA_ARGS__)
+#define ZE_ERROR(...)         Log::GetClientLogger()->Error(__VA_ARGS__)
+#define ZE_FATAL(...)         Log::GetClientLogger()->Fatal(__VA_ARGS__)

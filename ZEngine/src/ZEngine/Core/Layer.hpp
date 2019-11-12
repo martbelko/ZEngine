@@ -11,13 +11,13 @@ namespace ZEngine {
 		Layer(const std::string& debugName);
 		virtual ~Layer() = default;
 
-		virtual void onAttach() { }
-		virtual void onDetach() { }
-		virtual void onUpdate() { }
-		virtual void onEvent(Event& event) { }
-		virtual void onImGuiRender() { }
+		virtual void OnAttach() { }
+		virtual void OnDetach() { }
+		virtual void OnUpdate() { }
+		virtual void OnEvent(Event& event) { }
+		virtual void OnImGuiRender() { }
 
-		inline const std::string& getDebugName() const { return m_strDebugName; }
+		inline const std::string& GetDebugName() const { return m_strDebugName; }
 	private:
 		std::string m_strDebugName;
 	};

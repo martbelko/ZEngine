@@ -13,17 +13,17 @@ namespace ZEngine {
 		WindowsWindow(unsigned int width, unsigned int height, const std::string& title);
 		virtual ~WindowsWindow();
 
-		virtual void onUpdate() override;
+		virtual void OnUpdate() override;
 
-		virtual void setEventCallback(const EventCallbackFn& callback) override;
+		virtual void SetEventCallback(const EventCallbackFn& callback) override;
 
-		virtual unsigned int getWidth() const override;
-		virtual unsigned int getHeight() const override;
+		virtual unsigned int GetWidth() const override;
+		virtual unsigned int GetHeight() const override;
 
-		virtual void* getNativeWindow() const override;
+		virtual void* GetNativeWindow() const override;
 
-		virtual bool isVSync() const override;
-		virtual void setVSync(bool enabled) override;
+		virtual bool IsVSync() const override;
+		virtual void SetVSync(bool enabled) override;
 	private:
 		GLFWwindow* m_pNativeWindow;
 		GraphicsContext* m_pContext;

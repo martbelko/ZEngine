@@ -9,7 +9,7 @@ namespace ZEngine {
 	public:
 		OpenGLContext(GLFWwindow* window);
 
-		virtual void swapBuffers() override;
+		virtual void SwapBuffers() override;
 	private:
 		GLFWwindow* m_hWindowHandle;
 	};

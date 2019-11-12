@@ -18,6 +18,8 @@
 #include <memory>
 #include <utility>
 
-#include <Windows.h>
+#ifdef ZE_PLATFORM_WINDOWS
+	#include <Windows.h>
+#endif
 
 #include "ZEngine/Core/Log.hpp"
