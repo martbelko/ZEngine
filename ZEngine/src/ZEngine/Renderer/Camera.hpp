@@ -11,6 +11,7 @@ namespace ZEngine {
 
 		void SetPosition(const glm::vec3& position);
 		void SetRotation(float rotation);
+		void SetProjection(float left, float right, float bottom, float top);
 
 		inline float GetRotation() const { return m_Rotation; }
 		inline const glm::vec3 GetPosition() const { return m_Position; }

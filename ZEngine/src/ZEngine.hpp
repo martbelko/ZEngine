@@ -22,6 +22,7 @@
 #include "ZEngine/Renderer/Texture.hpp"
 #include "ZEngine/Renderer/Renderer.hpp"
 #include "ZEngine/Renderer/Camera.hpp"
+#include "ZEngine/Renderer/CameraController.hpp"
 
 // --- Entry Point ---
 #include "ZEngine/Core/EntryPoint.hpp"

@@ -24,6 +24,12 @@ namespace ZEngine {
 		RecalculateViewMatrix();
 	}
 
+	void Camera2D::SetProjection(float left, float right, float bottom, float top)
+	{
+		m_ProjectionMatrix = glm::ortho(left, right, bottom, top, -1.0f, 1.0f);
+		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
+	}
+
 	void Camera2D::RecalculateViewMatrix()
 	{
 		m_ViewMatrix = glm::translate(glm::mat4(1.0f), m_Position) *

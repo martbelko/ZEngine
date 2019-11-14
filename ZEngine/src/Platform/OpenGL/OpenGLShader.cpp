@@ -27,116 +27,10 @@ namespace ZEngine {
 
 	OpenGLShader::OpenGLShader(const std::string& vertexSource, const std::string fragmentSource)
 	{
-		// Create an empty vertex shader handle
-		unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-
-		// Send the vertex shader source code to GL
-		// Note that std::string's .c_str is NULL character terminated.
-		const char* source = (const char*)vertexSource.c_str();
-		glShaderSource(vertexShader, 1, &source, 0);
-
-		// Compile the vertex shader
-		glCompileShader(vertexShader);
-
-		int isCompiled = 0;
-		glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &isCompiled);
-		if (isCompiled == GL_FALSE)
-		{
-			int maxLength = 0;
-			glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &maxLength);
-
-			// The maxLength includes the NULL character
-			char* infoLog = static_cast<char*>(alloca(maxLength * sizeof(char)));
-			glGetShaderInfoLog(vertexShader, maxLength, &maxLength, infoLog);
-
-			// We don't need the shader anymore.
-			glDeleteShader(vertexShader);
-
-			// Log infoLog
-			ZE_CORE_ERROR("Vertex shader compilation failed!\n\t");
-			ZE_CORE_ERROR(infoLog);
-
-			// In this simple program, we'll just leave
-			return;
-		}
-
-		// Create an empty fragment shader handle
-		unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-
-		// Send the fragment shader source code to GL
-		// Note that std::string's .c_str is NULL character terminated.
-		source = (const char*)fragmentSource.c_str();
-		glShaderSource(fragmentShader, 1, &source, 0);
-
-		// Compile the fragment shader
-		glCompileShader(fragmentShader);
-
-		glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &isCompiled);
-		if (isCompiled == GL_FALSE)
-		{
-			int maxLength = 0;
-			glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &maxLength);
-
-			// The maxLength includes the NULL character
-			char* infoLog = static_cast<char*>(alloca(maxLength * sizeof(char)));
-			glGetShaderInfoLog(fragmentShader, maxLength, &maxLength, infoLog);
-
-			// We don't need the shader anymore.
-			glDeleteShader(fragmentShader);
-			// Either of them. Don't leak shaders.
-			glDeleteShader(vertexShader);
-
-			// Log infoLog
-			ZE_CORE_ERROR("Fragment shader compilation failed!\n\t");
-			ZE_CORE_ERROR(infoLog);
-
-			// In this simple program, we'll just leave
-			return;
-		}
-
-		// Vertex and fragment shaders are successfully compiled.
-		// Now time to link them together into a program.
-		// Get a program object.
-		unsigned int program = glCreateProgram();
-
-		// Attach our shaders to our program
-		glAttachShader(program, vertexShader);
-		glAttachShader(program, fragmentShader);
-
-		// Link our program
-		glLinkProgram(program);
-
-		// Note the different functions here: glGetProgram* instead of glGetShader*.
-		int isLinked = 0;
-		glGetProgramiv(program, GL_LINK_STATUS, &isLinked);
-		if (isLinked == GL_FALSE)
-		{
-			int maxLength = 0;
-			glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
-
-			// The maxLength includes the NULL character
-			char* infoLog = static_cast<char*>(alloca(maxLength * sizeof(char)));
-			glGetProgramInfoLog(program, maxLength, &maxLength, infoLog);
-
-			// We don't need the program anymore.
-			glDeleteProgram(program);
-			// Don't leak shaders either.
-			glDeleteShader(vertexShader);
-			glDeleteShader(fragmentShader);
-
-			// Log infoLog
-			ZE_CORE_ERROR("Shader linking failed!\n\t");
-			ZE_CORE_ERROR(infoLog);
-
-			// In this simple program, we'll just leave
-			return;
-		}
-
-		m_RendererID = program;
-
-		// Always detach shaders after a successful link.
-		glDetachShader(program, vertexShader);
-		glDetachShader(program, fragmentShader);
+		std::unordered_map<unsigned int, std::string> sources;
+		sources[GL_VERTEX_SHADER] = vertexSource;
+		sources[GL_FRAGMENT_SHADER] = fragmentSource;
+		Compile(sources);
 	}
 
 	OpenGLShader::~OpenGLShader()
@@ -151,7 +45,7 @@ namespace ZEngine {
 		if (in)
 		{
 			in.seekg(0, std::ios::end);
-			auto size = in.tellg();
+			unsigned int size = in.tellg();
 			in.seekg(0, std::ios::beg);
 			result.resize(size);
 			in.read(&result[0], size);
@@ -167,11 +61,11 @@ namespace ZEngine {
 	std::unordered_map<unsigned int, std::string> OpenGLShader::PreProcess(const std::string& source)
 	{
 		const std::string typeToken = "#type";
-		unsigned int typeTokenPos = source.find(typeToken, 0);
+		size_t typeTokenPos = source.find(typeToken, 0);
 		std::unordered_map<unsigned int, std::string> res;
 		while (typeTokenPos != std::string::npos)
 		{
-			unsigned int eol = source.find_first_of("\r\n", typeTokenPos);
+			size_t eol = source.find_first_of("\r\n", typeTokenPos);
 			ZE_CORE_ASSERT(eol != std::string::npos, "Unexpected end of file");
 			unsigned int count = eol - typeTokenPos - 6;
 			std::string shaderType = source.substr(typeTokenPos + 6, count);
@@ -185,7 +79,65 @@ namespace ZEngine {
 
 	void OpenGLShader::Compile(std::unordered_map<unsigned int, std::string> sources)
 	{
+		unsigned int program = glCreateProgram();
+		std::array<unsigned int, 3> shadersID;
+		unsigned int index = 0;
+		for (const auto& shaderSource : sources)
+		{
+			unsigned int shader = glCreateShader(shaderSource.first);
+			const char* source = shaderSource.second.c_str();
+			glShaderSource(shader, 1, &source, 0);
+			glCompileShader(shader);
 
+			int isCompiled = 0;
+			glGetShaderiv(shader, GL_COMPILE_STATUS, &isCompiled);
+			if (isCompiled == GL_FALSE)
+			{
+				int maxLength = 0;
+				glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
+
+				char* infoLog = (char*)(alloca((maxLength) * sizeof(char)));
+				glGetShaderInfoLog(shader, maxLength, &maxLength, infoLog);
+
+				glDeleteShader(shader);
+
+				ZE_CORE_ERROR("Shader compilation failed!\n\t");
+				ZE_CORE_ERROR(infoLog);
+
+				return;
+			}
+
+			glAttachShader(program, shader);
+			shadersID[index++] = shader;
+		}
+
+		glLinkProgram(program);
+
+		int isLinked = 0;
+		glGetProgramiv(program, GL_LINK_STATUS, &isLinked);
+		if (isLinked == GL_FALSE)
+		{
+			int maxLength = 0;
+			glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
+
+			char* infoLog = static_cast<char*>(alloca(maxLength * sizeof(char)));
+			glGetProgramInfoLog(program, maxLength, &maxLength, infoLog);
+
+			glDeleteProgram(program);
+
+			for (unsigned int shaderID : shadersID)
+				glDeleteShader(shaderID);
+
+			ZE_CORE_ERROR("Shader linking failed!\n\t");
+			ZE_CORE_ERROR(infoLog);
+
+			return;
+		}
+		
+		for (unsigned int shaderID : shadersID)
+			glDetachShader(program, shaderID);
+
+		m_RendererID = program;
 	}
 
 	void OpenGLShader::Bind() const
