@@ -4,6 +4,8 @@
 #include "ZEngine/Core/Window.hpp"
 #include "ZEngine/Core/Layer.hpp"
 #include "ZEngine/Core/LayerStack.hpp"
+#include "ZEngine/Core/Timestep.hpp"
+
 #include "ZEngine/ImGui/ImGuiLayer.hpp"
 
 #include "ZEngine/Events/Event.hpp"
@@ -42,6 +44,7 @@ namespace ZEngine {
 		bool m_bRunning = true;
 		LayerStack m_LayerStack;
 		ImGuiLayer* m_pImGuiLayer;
+		float m_LastFrameTime = 0.0f;
 	private:
 		static Application* s_pInstance;
 	};

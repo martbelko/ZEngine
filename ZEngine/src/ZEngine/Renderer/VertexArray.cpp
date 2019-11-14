@@ -7,7 +7,7 @@
 
 namespace ZEngine {
 
-	std::shared_ptr<ZEngine::VertexArray> VertexArray::Create()
+	Ref<VertexArray> VertexArray::Create()
 	{
 		switch (Renderer::GetRendererAPI())
 		{

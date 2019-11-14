@@ -1,6 +1,8 @@
 #pragma once
 
 #include <string>
+#include <memory>
+
 #include <glm/glm.hpp>
 
 namespace ZEngine {
@@ -8,15 +10,13 @@ namespace ZEngine {
 	class Shader
 	{
 	public:
-		Shader(const std::string& vertexSource, const std::string fragmentSource);
-		~Shader();
+		virtual ~Shader() = default;
 
-		void Bind() const;
-		void Unbind() const;
-
-		void UploadUniformMat4(const std::string& uniformName, const glm::mat4& matrix);
-	private:
-		unsigned int m_RendererID;
+		virtual void Bind() const = 0;
+		virtual void Unbind() const = 0;
+	public:
+		static Ref<Shader> Create(const std::string& path);
+		static Ref<Shader> Create(const std::string& vertexSource, const std::string& fragmentSource);
 	};
 
 }

@@ -7,6 +7,11 @@ namespace ZEngine {
 	class RenderCommand
 	{
 	public:
+		inline static void Init()
+		{
+			s_RendererAPI->Init();
+		}
+
 		static inline void SetClearColor(const glm::vec4& color)
 		{
 			s_RendererAPI->SetClearColor(color);
@@ -17,7 +22,7 @@ namespace ZEngine {
 			s_RendererAPI->Clear();
 		}
 
-		static inline void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray)
+		static inline void DrawIndexed(const Ref<VertexArray>& vertexArray)
 		{
 			s_RendererAPI->DrawIndexed(vertexArray);
 		}

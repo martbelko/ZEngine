@@ -3,9 +3,16 @@
 
 #include "ZEngine/Renderer/Camera.hpp"
 
+#include "Platform/OpenGL/OpenGLShader.hpp" // TODO: Temporary
+
 namespace ZEngine {
 
 	std::unique_ptr<Renderer::SceneData> Renderer::s_SceneData = std::make_unique<Renderer::SceneData>();
+
+	void Renderer::Init()
+	{
+		RenderCommand::Init();
+	}
 
 	void Renderer::BeginScene(const Camera2D& camera)
 	{
@@ -17,10 +24,11 @@ namespace ZEngine {
 
 	}
 
-	void Renderer::Submit(const std::shared_ptr<VertexArray>& vertexArray, const std::shared_ptr<Shader> shader)
+	void Renderer::Submit(const Ref<VertexArray>& vertexArray, const Ref<Shader> shader, const glm::mat4& transform /*= glm::mat4(1.0f)*/)
 	{
 		shader->Bind();
-		shader->UploadUniformMat4("u_ViewProjection", s_SceneData->s_ViewProjectionMatrix);
+		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_ViewProjection", s_SceneData->s_ViewProjectionMatrix); // TODO: Do this just one
+		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_Transform", transform);
 
 		vertexArray->Bind();
 		RenderCommand::DrawIndexed(vertexArray);

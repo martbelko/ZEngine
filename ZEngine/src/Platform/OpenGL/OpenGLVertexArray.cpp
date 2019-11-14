@@ -45,7 +45,7 @@ namespace ZEngine {
 		glBindVertexArray(0);
 	}
 
-	void OpenGLVertexArray::AddVertexBuffer(std::shared_ptr<VertexBuffer>& vertexBuffer)
+	void OpenGLVertexArray::AddVertexBuffer(Ref<VertexBuffer>& vertexBuffer)
 	{
 		ZE_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer Layout was not set!");
 
@@ -68,7 +68,7 @@ namespace ZEngine {
 		m_VertexBuffers.push_back(vertexBuffer);
 	}
 
-	void OpenGLVertexArray::SetIndexBuffer(std::shared_ptr<IndexBuffer>& indexBuffer)
+	void OpenGLVertexArray::SetIndexBuffer(Ref<IndexBuffer>& indexBuffer)
 	{
 		glBindVertexArray(m_RendererID);
 		indexBuffer->Bind();
@@ -76,12 +76,12 @@ namespace ZEngine {
 	}
 
 
-	const std::vector<std::shared_ptr<VertexBuffer>>& OpenGLVertexArray::GetVertexBuffers() const
+	const std::vector<Ref<VertexBuffer>>& OpenGLVertexArray::GetVertexBuffers() const
 	{
 		return m_VertexBuffers;
 	}
 
-	const std::shared_ptr<IndexBuffer>& OpenGLVertexArray::GetIndexBuffer() const
+	const Ref<IndexBuffer>& OpenGLVertexArray::GetIndexBuffer() const
 	{
 		return m_IndexBuffer;
 	}

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #ifndef ZE_PLATFORM_WINDOWS
 	#error Windows only support at the moment
 #endif
@@ -21,3 +23,13 @@
 #endif
 
 #define BIT(x) (1 << x)
+
+namespace ZEngine {
+
+	template<typename T>
+	using Scope = std::unique_ptr<T>;
+
+	template<typename T>
+	using Ref = std::shared_ptr<T>;
+
+}

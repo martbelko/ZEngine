@@ -2,6 +2,8 @@
 
 #include "ZEngine/Events/Event.hpp"
 
+#include "ZEngine/Core/Timestep.hpp"
+
 namespace ZEngine {
 
 	class Layer
@@ -13,7 +15,7 @@ namespace ZEngine {
 
 		virtual void OnAttach() { }
 		virtual void OnDetach() { }
-		virtual void OnUpdate() { }
+		virtual void OnUpdate(const Timestep& ts) { }
 		virtual void OnEvent(Event& event) { }
 		virtual void OnImGuiRender() { }
 

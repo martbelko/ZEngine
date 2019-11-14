@@ -22,10 +22,12 @@ workspace "ZEngine"
 	IncludeDir["Glad"] = "ZEngine/vendor/Glad/include"
 	IncludeDir["ImGui"] = "ZEngine/vendor/ImGui"
 	IncludeDir["glm"] = "ZEngine/vendor/glm"
+	IncludeDir["SOIL"] = "ZEngine/vendor/SOIL2/incs"
 
 	include "ZEngine/vendor/GLFW"
 	include "ZEngine/vendor/Glad"
 	include "ZEngine/vendor/ImGui"
+	include "ZEngine/vendor/SOIL2"
 	
 	project "ZEngine"
 		kind "StaticLib"
@@ -45,7 +47,7 @@ workspace "ZEngine"
 		{
 			"%{prj.name}/src/**.hpp",
 			"%{prj.name}/src/**.hpp",
-			"%{prj.name}/src/**.cpp"
+			"%{prj.name}/src/**.cpp",
 		}
 
 		includedirs
@@ -54,7 +56,8 @@ workspace "ZEngine"
 			"%{IncludeDir.GLFW}",
 			"%{IncludeDir.Glad}",
 			"%{IncludeDir.ImGui}",
-			"%{IncludeDir.glm}"
+			"%{IncludeDir.glm}",
+			"%{IncludeDir.SOIL}"
 		}
 
 		links
@@ -62,7 +65,8 @@ workspace "ZEngine"
 			"opengl32.lib",
 			"GLFW",
 			"Glad",
-			"ImGui"
+			"ImGui",
+			"SOIL2"
 		}
 
 		filter "configurations:Debug"

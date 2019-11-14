@@ -11,7 +11,7 @@
 
 #include "ZEngine/Renderer/Renderer.hpp"
 
-#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
 namespace ZEngine {
 
@@ -23,9 +23,12 @@ namespace ZEngine {
 		s_pInstance = this;
 
 		Log::Init();
-		m_pWindow = std::unique_ptr<Window>(Window::Create());
+
+		m_pWindow = std::unique_ptr<Window>(Window::Create(1280, 720, "ZEngine"));
 		m_pWindow->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
-		m_pWindow->SetVSync(true);
+		m_pWindow->SetVSync(false);
+
+		Renderer::Init();
 
 		m_pImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_pImGuiLayer);
@@ -40,9 +43,13 @@ namespace ZEngine {
 	{
 		while (m_bRunning)
 		{
+			float time = glfwGetTime(); // TODO: Move this to platform, this is GLFW tied!!!
+			Timestep timestep = time - m_LastFrameTime;
+			m_LastFrameTime = time;
+
 			for (Layer* layer : m_LayerStack)
 			{
-				layer->OnUpdate();
+				layer->OnUpdate(timestep);
 			}
 
 			m_pImGuiLayer->Begin();
