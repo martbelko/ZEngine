@@ -21,8 +21,9 @@
 #include "ZEngine/Renderer/VertexArray.hpp"
 #include "ZEngine/Renderer/Texture.hpp"
 #include "ZEngine/Renderer/Renderer.hpp"
+#include "ZEngine/Renderer/Renderer2D.hpp"
 #include "ZEngine/Renderer/Camera.hpp"
 #include "ZEngine/Renderer/CameraController.hpp"
 
 // --- Entry Point ---
-#include "ZEngine/Core/EntryPoint.hpp"
+// #include "ZEngine/Core/EntryPoint.hpp"

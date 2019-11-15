@@ -10,6 +10,7 @@
 #include "ZEngine/Core/MouseButtonCodes.hpp"
 
 #include "ZEngine/Renderer/Renderer.hpp"
+#include "ZEngine/Renderer/Renderer2D.hpp"
 
 #include <GLFW/glfw3.h>
 
@@ -36,6 +37,7 @@ namespace ZEngine {
 
 	Application::~Application()
 	{
+		Renderer2D::Shutdown();
 	}
 
 	void Application::Run()

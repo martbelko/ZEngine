@@ -1,4 +1,7 @@
 #include <ZEngine.hpp>
+#include <ZEngine/Core/EntryPoint.hpp>
+
+#include "Sandbox2D.hpp"
 
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -21,7 +24,7 @@ public:
 		};
 
 		ZEngine::Ref<ZEngine::VertexBuffer> vertexBuffer;
-		vertexBuffer.reset(ZEngine::VertexBuffer::Create(vertices, sizeof(vertices)));
+		vertexBuffer = ZEngine::VertexBuffer::Create(vertices, sizeof(vertices));
 
 		vertexBuffer->SetLayout({
 			{ ZEngine::ShaderDataType::Float3, "a_Position" },
@@ -34,7 +37,7 @@ public:
 		};
 
 		ZEngine::Ref<ZEngine::IndexBuffer> indexBuffer;
-		indexBuffer.reset(ZEngine::IndexBuffer::Create(indices, sizeof(indices) / sizeof(unsigned int)));
+		indexBuffer = ZEngine::IndexBuffer::Create(indices, sizeof(indices) / sizeof(unsigned int));
 
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
@@ -48,7 +51,7 @@ public:
 		};
 
 		ZEngine::Ref<ZEngine::VertexBuffer> squareVB;
-		squareVB.reset(ZEngine::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+		squareVB = ZEngine::VertexBuffer::Create(squareVertices, sizeof(squareVertices));
 
 		squareVB->SetLayout({
 			{ ZEngine::ShaderDataType::Float3, "a_Position" },
@@ -64,7 +67,7 @@ public:
 		};
 
 		ZEngine::Ref<ZEngine::IndexBuffer> squareIB;
-		squareIB.reset(ZEngine::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(unsigned int)));
+		squareIB = ZEngine::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(unsigned int));
 
 		m_SquareVA->SetIndexBuffer(squareIB);
 
@@ -151,7 +154,8 @@ class Sandbox : public ZEngine::Application
 public:
 	Sandbox()
 	{
-		ZEngine::Application::Get().PushLayer(new ExampleLayer());
+		//ZEngine::Application::Get().PushLayer(new ExampleLayer());
+		ZEngine::Application::Get().PushLayer(new Sandbox2D());
 	}
 
 	virtual ~Sandbox() override

@@ -3,6 +3,8 @@
 
 #include "ZEngine/Renderer/Camera.hpp"
 
+#include "ZEngine/Renderer/Renderer2D.hpp"
+
 #include "Platform/OpenGL/OpenGLShader.hpp" // TODO: Temporary
 
 namespace ZEngine {
@@ -12,6 +14,7 @@ namespace ZEngine {
 	void Renderer::Init()
 	{
 		RenderCommand::Init();
+		Renderer2D::Init();
 	}
 
 	void Renderer::OnWindowResize(unsigned int width, unsigned int height)
