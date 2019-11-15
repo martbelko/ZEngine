@@ -4,6 +4,8 @@
 
 #include "ZEngine/Events/Event.hpp"
 #include "ZEngine/Events/MouseEvent.hpp"
+#include "ZEngine/Events/KeyEvent.hpp"
+#include "ZEngine/Events/ApplicationEvent.hpp"
 
 #include "ZEngine/Core/Timestep.hpp"
 
@@ -23,6 +25,7 @@ namespace ZEngine {
 		inline const Camera2D& GetCamera() const { return *m_Camera; }
 	private:
 		bool OnMouseScrolled(MouseScrolledEvent& event);
+		bool OnWindowResize(WindowResizeEvent& event);
 	private:
 		float m_ZoomLevel = 1.0f;
 		float m_AspectRatio;

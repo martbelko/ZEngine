@@ -12,6 +12,11 @@ namespace ZEngine {
 		hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
 	}
 
+	Logger::~Logger()
+	{
+		SetConsoleTextAttribute(hStdout, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+	}
+
 	void Logger::PrintLoggerName()
 	{
 		std::cout << '[' << m_strName << "] : ";

@@ -27,6 +27,11 @@ namespace ZEngine {
 			s_RendererAPI->DrawIndexed(vertexArray);
 		}
 
+		static inline void SetViewport(int x, int y, unsigned int width, unsigned int height)
+		{
+			s_RendererAPI->SetViewport(x, y, width, height);
+		}
+
 		static inline RendererAPI::API GetRendererAPI() { return s_RendererAPI->GetRendererAPI(); }
 	private:
 		static std::unique_ptr<RendererAPI> s_RendererAPI;

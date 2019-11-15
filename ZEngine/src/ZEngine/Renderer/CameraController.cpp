@@ -4,6 +4,8 @@
 #include "ZEngine/Core/Input.hpp"
 #include "ZEngine/Core/KeyCodes.hpp"
 
+#include "ZEngine/Renderer/RenderCommand.hpp"
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -72,6 +74,7 @@ namespace ZEngine {
 	{
 		EventDispatcher dispatcher(event);
 		dispatcher.dispatch<MouseScrolledEvent>(BIND_EVENT_FN(Camera2DController::OnMouseScrolled));
+		dispatcher.dispatch<WindowResizeEvent>(BIND_EVENT_FN(Camera2DController::OnWindowResize));
 	}
 
 	bool Camera2DController::OnMouseScrolled(MouseScrolledEvent& e)
@@ -79,6 +82,15 @@ namespace ZEngine {
 		m_ZoomLevel -= e.getYOffset() * 0.25f;
 		m_ZoomLevel = std::clamp(m_ZoomLevel, 0.25f, 5.0f);
 		m_Camera->SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
+
+		return false;
+	}
+
+	bool Camera2DController::OnWindowResize(WindowResizeEvent& e)
+	{
+		m_AspectRatio = static_cast<float>(e.getNewWidth()) / static_cast<float>(e.getNewHeight());
+		m_Camera->SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
+
 		return false;
 	}
 

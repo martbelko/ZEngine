@@ -19,8 +19,8 @@ namespace ZEngine {
 		};
 
 		Logger() = default;
-
 		Logger(const std::string& name);
+		~Logger();
 		
 		template<typename T>
 		void Trace(const T& value)

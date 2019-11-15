@@ -13,6 +13,8 @@ namespace ZEngine {
 		virtual void Clear() override;
 
 		virtual void DrawIndexed(const Ref<VertexArray>& vertexArray) override;
+
+		virtual void SetViewport(int x, int y, unsigned int width, unsigned int height) override;
 	};
 
 }

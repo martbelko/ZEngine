@@ -36,7 +36,6 @@ namespace ZEngine {
 
 	Application::~Application()
 	{
-
 	}
 
 	void Application::Run()
@@ -47,9 +46,12 @@ namespace ZEngine {
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 
-			for (Layer* layer : m_LayerStack)
+			if (!m_Minimized)
 			{
-				layer->OnUpdate(timestep);
+				for (Layer* layer : m_LayerStack)
+				{
+					layer->OnUpdate(timestep);
+				}
 			}
 
 			m_pImGuiLayer->Begin();
@@ -81,6 +83,7 @@ namespace ZEngine {
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
+		dispatcher.dispatch<WindowResizeEvent>(BIND_EVENT_FN(Application::OnWindowResize));
 
 		for (auto layer = Application::Get().m_LayerStack.end(); layer != Application::Get().m_LayerStack.begin(); )
 		{
@@ -96,8 +99,18 @@ namespace ZEngine {
 		return true;
 	}
 
-	bool Application::OnWindowResize(WindowResizeEvent& event)
+	bool Application::OnWindowResize(WindowResizeEvent& e)
 	{
+		if (e.getNewWidth() == 0 || e.getNewHeight() == 0)
+		{
+			m_Minimized = true;
+			return false;
+		}
+
+		m_Minimized = false;
+
+		Renderer::OnWindowResize(e.getNewWidth(), e.getNewHeight());
+
 		return false;
 	}
 

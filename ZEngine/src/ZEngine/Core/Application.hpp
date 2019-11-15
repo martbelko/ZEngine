@@ -40,6 +40,7 @@ namespace ZEngine {
 	private:
 		std::unique_ptr<Window> m_pWindow;
 		bool m_bRunning = true;
+		bool m_Minimized = false;
 		LayerStack m_LayerStack;
 		ImGuiLayer* m_pImGuiLayer;
 		float m_LastFrameTime = 0.0f;
