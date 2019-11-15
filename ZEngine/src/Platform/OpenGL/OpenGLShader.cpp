@@ -150,6 +150,16 @@ namespace ZEngine {
 		glUseProgram(0);
 	}
 
+	void OpenGLShader::SetUniformFloat4(const std::string& uniformName, const glm::vec4& vec)
+	{
+		UploadUniformFloat4(uniformName, vec);
+	}
+
+	void OpenGLShader::SetUniformMat4(const std::string& uniformName, const glm::mat4& mat)
+	{
+		UploadUniformMat4(uniformName, mat);
+	}
+
 	void OpenGLShader::UploadUniformFloat(const std::string& name, float value)
 	{
 		int location = glGetUniformLocation(m_RendererID, name.c_str());

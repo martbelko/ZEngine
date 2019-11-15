@@ -3,8 +3,6 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include <Platform/OpenGL/OpenGLShader.hpp>
-
 void Sandbox2D::OnAttach()
 {
 }
@@ -27,4 +25,3 @@ void Sandbox2D::OnEvent(ZEngine::Event& event)
 {
 	m_CameraController->OnEvent(event);
 }
-

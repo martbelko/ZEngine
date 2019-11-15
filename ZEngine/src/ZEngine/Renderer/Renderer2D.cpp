@@ -1,8 +1,6 @@
 #include "zpch.hpp"
 #include "Renderer2D.hpp"
 
-#include "Platform/OpenGL/OpenGLShader.hpp"
-
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -59,7 +57,7 @@ namespace ZEngine {
 	void Renderer2D::BeginScene(const Camera2D& camera)
 	{
 		s_Data->shader->Bind();
-		std::dynamic_pointer_cast<OpenGLShader>(s_Data->shader)->UploadUniformMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
+		s_Data->shader->SetUniformMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
 	}
 
 	void Renderer2D::EndScene()
@@ -76,8 +74,8 @@ namespace ZEngine {
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 
 		s_Data->shader->Bind();
-		std::dynamic_pointer_cast<OpenGLShader>(s_Data->shader)->UploadUniformFloat4("u_Color", color);
-		std::dynamic_pointer_cast<OpenGLShader>(s_Data->shader)->UploadUniformMat4("u_Transform", transform);
+		s_Data->shader->SetUniformFloat4("u_Color", color);
+		s_Data->shader->SetUniformMat4("u_Transform", transform);
 
 		s_Data->vertexArray->Bind();
 		RenderCommand::DrawIndexed(s_Data->vertexArray);

@@ -13,8 +13,6 @@ public:
 	virtual void OnUpdate(const ZEngine::Timestep& ts) override;
 
 	virtual void OnEvent(ZEngine::Event& event) override;
-
-	bool OnMousePressed(ZEngine::MouseButtonPressedEvent& e);
 private:
 	ZEngine::Ref<ZEngine::VertexArray> m_SquareVA;
 	ZEngine::Ref<ZEngine::Shader> m_Shader;
