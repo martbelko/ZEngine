@@ -14,6 +14,8 @@ namespace ZEngine {
 		virtual unsigned int GetWidth() const = 0;
 		virtual unsigned int GetHeight() const = 0;
 
+		virtual void SetData(const void* data, unsigned int size) = 0;
+
 		virtual void Bind(unsigned int textureUnit = 0) const = 0;
 	};
 
@@ -21,6 +23,7 @@ namespace ZEngine {
 	{
 	public:
 		static Ref<Texture2D> Create(const std::string& path);
+		static Ref<Texture2D> Create(unsigned int width, unsigned int height);
 	};
 
 }

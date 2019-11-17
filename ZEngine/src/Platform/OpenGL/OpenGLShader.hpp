@@ -14,6 +14,8 @@ namespace ZEngine {
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
 
+		void SetUniformInt(const std::string& name, int value) override;
+
 		void SetUniformFloat4(const std::string& name, const glm::vec4& vector) override;
 
 		void SetUniformMat4(const std::string& uniformName, const glm::mat4& matrix) override;

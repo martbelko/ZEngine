@@ -150,6 +150,11 @@ namespace ZEngine {
 		glUseProgram(0);
 	}
 
+	void OpenGLShader::SetUniformInt(const std::string& name, int value)
+	{
+		UploadUniformInt(name, value);
+	}
+
 	void OpenGLShader::SetUniformFloat4(const std::string& uniformName, const glm::vec4& vec)
 	{
 		UploadUniformFloat4(uniformName, vec);

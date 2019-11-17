@@ -3,6 +3,7 @@
 #include "ZEngine/Renderer/Camera.hpp"
 #include "ZEngine/Renderer/VertexArray.hpp"
 #include "ZEngine/Renderer/Shader.hpp"
+#include "ZEngine/Renderer/Texture.hpp"
 #include "ZEngine/Renderer/RenderCommand.hpp"
 
 namespace ZEngine {
@@ -18,6 +19,10 @@ namespace ZEngine {
 
 		static void DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color);
 		static void DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color);
+		static void DrawQuad(const glm::vec2& position, const glm::vec2& size, const Ref<Texture>& texture);
+		static void DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture>& texture);
+		static void DrawQuad(const glm::vec2& position, const glm::vec2& size, const Ref<Texture>& texture, const glm::vec4& color);
+		static void DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture>& texture, const glm::vec4& color);
 	};
 
 }

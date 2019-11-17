@@ -10,6 +10,7 @@
 #include "ZEngine/Core/MouseButtonCodes.hpp"
 #include "ZEngine/Core/KeyCodes.hpp"
 #include "ZEngine/Core/Timestep.hpp"
+#include "ZEngine/Core/Timing.hpp"
 
 #include "ZEngine/Events/ApplicationEvent.hpp"
 #include "ZEngine/Events/KeyEvent.hpp"

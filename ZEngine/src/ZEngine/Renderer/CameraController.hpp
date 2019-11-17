@@ -38,7 +38,6 @@ namespace ZEngine {
 
 		float m_CameraSpeed = 5.0f;
 		float m_CameraRotationSpeed = 180.0f;
-
 	};
 
 }

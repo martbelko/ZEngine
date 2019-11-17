@@ -8,7 +8,10 @@ namespace ZEngine {
 	{
 	public:
 		OpenGLTexture2D(const std::string& path);
+		OpenGLTexture2D(unsigned int width, unsigned int height);
 		virtual ~OpenGLTexture2D() override;
+
+		virtual void SetData(const void* data, unsigned int size) override;
 
 		virtual unsigned int GetWidth() const override;
 		virtual unsigned int GetHeight() const override;
